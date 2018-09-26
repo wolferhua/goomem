@@ -1,8 +1,15 @@
 package main
 
-import "github.com/wolferhua/goomem"
+import (
+	"fmt"
+	"github.com/wolferhua/goomem"
+)
 
 func main() {
 	goomem.StartUp()
-	goomem.Get()
+	v, err := goomem.Get("a")
+	if err != nil {
+		fmt.Println(v)
+		fmt.Println(err)
+	}
 }
