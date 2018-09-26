@@ -47,6 +47,6 @@ func Set(key string, value interface{}, expire int64) interface{} {
 		memCache.del(key)
 		return nil
 	}
-	memCache.Items[key] = newItem(value, expire)
+	memCache.Items[key] = *newItem(value, expire)
 	return value
 }
