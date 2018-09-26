@@ -1,5 +1,7 @@
 package goomem
 
+import "reflect"
+
 var isUp bool = false
 var memCache *gm_cache
 
@@ -10,7 +12,7 @@ func StartUp() bool {
 	}
 	//已经启动了。
 	isUp = true
-	memCache = new(gm_cache)
+	memCache = newGmCache()
 	return true
 }
 
@@ -25,6 +27,16 @@ func Get(key string) (interface{}, *gm_error) {
 		return nil, newError(ERR_MSG_EXPIRED, ERR_CODE_EXPIRED)
 	}
 	return v.Data, nil
+}
+
+func GetForType(key string, t interface{}) *gm_error {
+	v, err := Get(key)
+	if err != nil {
+		return err
+	}
+	//reflect.TypeOf(v).ConvertibleTo(t)
+	t = reflect.ValueOf(v)
+	return nil
 }
 
 //Set value

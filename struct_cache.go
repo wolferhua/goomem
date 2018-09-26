@@ -22,3 +22,10 @@ func (this *gm_cache) del(key string) bool {
 	delete(this.Items, key)
 	return true
 }
+
+func newGmCache() *gm_cache {
+	return &gm_cache{
+		Mu:    new(sync.RWMutex),
+		Items: make(map[string]*gm_item),
+	}
+}
