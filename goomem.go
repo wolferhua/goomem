@@ -16,12 +16,12 @@ func StartUp() bool {
 
 //获取值
 func Get(key string) (interface{}, *gm_error) {
-	v, ok := memCache.Get(key)
+	v, ok := memCache.get(key)
 	if !ok {
 		return nil, newError(ERR_MSG_NOT_FOUND, ERR_CODE_NOT_FOUND)
 	}
 	if v.IsExpire() {
-		memCache.Del(key)
+		memCache.del(key)
 		return nil, newError(ERR_MSG_EXPIRED, ERR_CODE_EXPIRED)
 	}
 	return v.Data, nil
@@ -29,8 +29,10 @@ func Get(key string) (interface{}, *gm_error) {
 
 //Set value
 func Set(key string, value interface{}, expire int64) interface{} {
+	memCache.Mu.Lock()
+	defer memCache.Mu.Unlock()
 	if expire < 0 || value == nil {
-		memCache.Del(key)
+		memCache.del(key)
 		return nil
 	}
 	memCache.Items[key] = newItem(value, expire)
