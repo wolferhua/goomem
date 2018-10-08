@@ -1,7 +1,5 @@
 package goomem
 
-import "reflect"
-
 var isUp bool = false
 var memCache *gm_cache
 
@@ -35,7 +33,12 @@ func GetForType(key string, t interface{}) *gm_error {
 		return err
 	}
 	//reflect.TypeOf(v).ConvertibleTo(t)
-	t = reflect.ValueOf(v)
+	t = &v
+	//t = reflect.TypeOf(v).ConvertibleTo(reflect.TypeOf(t))
+	//fmt.Println(reflect.TypeOf(v))
+	//fmt.Println(reflect.ValueOf(v))
+	//fmt.Println(reflect.ValueOf(v))
+	//fmt.Println(reflect.ValueOf(v))
 	return nil
 }
 
