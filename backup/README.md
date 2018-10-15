@@ -1,2 +1,0 @@
-# goomem
-go memory cache
