@@ -1,9 +1,34 @@
 package goomem
 
-import "sync"
+import (
+	"fmt"
+	"sync"
+	"time"
+)
 
 var items = map[string]*mItem{}
 var itemMux = &sync.RWMutex{}
+var tk *time.Ticker
+
+func init() {
+	//设置定时器，定时过期
+	tk = time.NewTicker(time.Second)
+	go ticker()
+}
+
+func ticker() {
+	for range tk.C {
+		for key, item := range items {
+			fmt.Println(key)
+			//fmt.Println(item)
+			if item.IsExpire() {
+				itemMux.Lock()
+				delete(items, key)
+				itemMux.Unlock()
+			}
+		}
+	}
+}
 
 // item 加入map
 func addItem(item *mItem) bool {
@@ -22,7 +47,7 @@ func addItem(item *mItem) bool {
 //get item
 func getItem(key string) *mItem {
 	item, ok := items[key]
-	if ok {
+	if ok && !item.IsExpire() {
 		return item
 	}
 	return nil

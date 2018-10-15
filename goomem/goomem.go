@@ -9,3 +9,4 @@ func Set(key string, value interface{}, expire int64) bool {
 func Get(key string) interface{} {
 	return getItemValue(key)
 }
+

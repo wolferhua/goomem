@@ -2,36 +2,21 @@ package main
 
 import (
 	"fmt"
-	"reflect"
+	"github.com/wolferhua/goomem/goomem"
 )
 
-type intt int
-type inttt intt
 
 func main() {
-	fmt.Println("fmt.Println(reflect.TypeOf(1))")
-	fmt.Println(reflect.TypeOf(1))
-	fmt.Println(reflect.TypeOf(1).Kind())
+	fmt.Println(goomem.Get("a"))
+	fmt.Println(goomem.Set("a", "a", 0))
+	fmt.Println(goomem.Get("a"))
+	fmt.Println(goomem.Set("a", 1231, 0))
+	fmt.Println(goomem.Get("a"))
+	fmt.Println(goomem.Set("a", 111, 2))
+	fmt.Println(goomem.Get("a"))
+	fmt.Println(goomem.Set("a", 123123, 3))
+	fmt.Println(goomem.Get("a"))
+	select {
 
-	fmt.Println("fmt.Println(reflect.TypeOf(intt(1)))")
-	fmt.Println(reflect.TypeOf(intt(1)))
-	fmt.Println(reflect.TypeOf(intt(1)).Kind())
-	fmt.Println(reflect.TypeOf(intt(1)).IsVariadic())
-
-	fmt.Println("fmt.Println(reflect.TypeOf(inttt(1)))")
-	fmt.Println(reflect.TypeOf(inttt(1)))
-	fmt.Println(reflect.TypeOf(inttt(1)).Kind())
-	fmt.Println(reflect.TypeOf(inttt(1)).IsVariadic())
-
-	fmt.Println("fmt.Println(reflect.TypeOf(1.1))")
-	fmt.Println(reflect.TypeOf(1.1))
-	fmt.Println(reflect.TypeOf(1.1).Kind())
-	fmt.Println(reflect.TypeOf(1.1).IsVariadic())
-
-	fmt.Println("fmt.Println(reflect.TypeOf(\"\"))")
-
-	fmt.Println(reflect.TypeOf(string("")))
-	fmt.Println(reflect.TypeOf(string("")).Kind())
-	fmt.Println(reflect.TypeOf(string("")).IsVariadic())
-
+	}
 }
