@@ -1,4 +1,4 @@
-package goomem
+package backup
 
 var isUp bool = false
 var memCache *gm_cache

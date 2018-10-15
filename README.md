@@ -1,2 +1,8 @@
-# goomem
-go memory cache
+# goomem - GoLang Memory Cache
+
+> golang memory cache
+
+## 架构
+
+
+
