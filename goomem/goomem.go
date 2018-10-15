@@ -1,7 +1,11 @@
 package goomem
 
-func Set(key, value string) {
-	mapc = map[string]string{
-		key: value,
-	}
+//Set 设置一个值
+func Set(key string, value interface{}, expire int64) bool {
+	return addItem(NewMItem(key, value, expire))
+}
+
+//获取值
+func Get(key string) interface{} {
+	return getItemValue(key)
 }
