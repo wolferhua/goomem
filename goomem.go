@@ -1,5 +1,5 @@
 package goomem
 
-func Get(key string) *Command {
-	return NewCommand("get",key)
+func Get(key string) string {
+
 }
