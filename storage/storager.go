@@ -3,6 +3,7 @@ package storage
 import (
 	"github.com/wolferhua/goomem/item"
 	"sync"
+	"time"
 )
 
 //map
@@ -25,7 +26,10 @@ func Get(key string) (e *item.Item, ok bool) {
 	defer RUnlock()
 
 	e, ok = storage[key]
-	return
+	if !e.IsExpire() {
+		return
+	}
+	return nil, false
 }
 
 //批量获取
@@ -35,9 +39,10 @@ func Gets(keys ...string) []*item.Item {
 
 	var items []*item.Item
 	if len(keys) > 0 {
+		now := time.Now().Unix()
 		for _, key := range keys {
 			e, ok := storage[key]
-			if ok {
+			if ok && !e.IsExpireByTime(now) {
 				items = append(items, e)
 			}
 		}

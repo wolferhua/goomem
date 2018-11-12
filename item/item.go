@@ -20,8 +20,16 @@ type Item struct {
 }
 
 //判断是否过期
-func (i Item) IsExpire() bool {
-	if i.Expire > 0 && i.Expire < time.Now().Unix() {
+func (e *Item) IsExpire() bool {
+	if e.Expire > 0 && e.Expire < time.Now().Unix() {
+		return true
+	}
+	return false
+}
+
+//验证过期
+func (e *Item) IsExpireByTime(time int64) bool {
+	if e.Expire > 0 && e.Expire < time {
 		return true
 	}
 	return false
