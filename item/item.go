@@ -19,6 +19,19 @@ type Item struct {
 	Expire int64
 }
 
+func NewItem(key string, value interface{}, expire int64) *Item {
+	if expire > 0 {
+		expire += time.Now().Unix()
+	} else {
+		expire = 0
+	}
+	return &Item{
+		Key:    key,
+		Value:  value,
+		Expire: expire,
+	}
+}
+
 //判断是否过期
 func (e *Item) IsExpire() bool {
 	if e.Expire > 0 && e.Expire < time.Now().Unix() {

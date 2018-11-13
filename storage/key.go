@@ -1,5 +1,7 @@
 package storage
 
+
+
 func GetKeyHash(key string) int {
 	hash := 0
 	l := len(key)
